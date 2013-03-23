@@ -1,0 +1,29 @@
+extends layout
+block content
+  h1= title
+
+  form(action='', method='post')
+    p
+      label Título
+        input(type='text', name='title')
+        if (err && err.errors && err.errors.title && err.errors.title.type)
+          p #{err.errors.title.type}
+
+    p
+      label Descrição
+        br
+        textarea(name='body')
+        if (err && err.errors && err.errors.body && err.errors.body.type)
+          p #{err.errors.body.type}
+
+    p
+      input(type='submit')
+
+    - tickets.forEach(function (item) {
+      div
+        p
+          strong= '> ' + item.title
+        p
+          blockquote= item.body
+      hr
+    - })
